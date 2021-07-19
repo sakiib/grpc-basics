@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option go_package = "github.com/sakiib/grpc-basics;pb";
+
+import "author.proto";
+
+message Book {
+  string name = 1;
+  string id = 2;
+  string isbn = 3;
+  double price = 4;
+  Author author = 5;
+}
