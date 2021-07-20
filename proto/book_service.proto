@@ -12,6 +12,15 @@ message CreateBookResponse {
   string id = 1;
 }
 
+message GetBookRequest {
+  string id = 1;
+}
+
+message GetBookResponse {
+  Book book = 1;
+}
+
 service BookService {
   rpc CreateBook(CreateBookRequest) returns (CreateBookResponse) {};
+  rpc GetBook(GetBookRequest) returns (GetBookResponse) {};
 }

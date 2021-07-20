@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	pb "github.com/sakiib/grpc-basics/gen.pb.go"
+	"github.com/sakiib/grpc-basics/helpers"
 	"log"
 )
 
@@ -25,5 +26,12 @@ func (b *BookService) CreateBook(ctx context.Context, req *pb.CreateBookRequest)
 		Id: fmt.Sprintf("%s-%s", book.Id, book.Name),
 	}
 
+	return res, nil
+}
+
+func (b *BookService) GetBook(ctx context.Context, req *pb.GetBookRequest) (*pb.GetBookResponse, error) {
+	res := &pb.GetBookResponse{
+		Book: helpers.RandBook(),
+	}
 	return res, nil
 }
