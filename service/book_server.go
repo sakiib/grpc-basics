@@ -2,44 +2,28 @@ package service
 
 import (
 	"context"
-	"github.com/google/uuid"
+	"fmt"
 	pb "github.com/sakiib/grpc-basics/gen.pb.go"
 	"log"
 )
 
-type BookServer struct {
-	Store BookStore
+type BookService struct {
+	pb.UnimplementedBookServiceServer
 }
 
-func NewBookServer(store *InMemoryBookStore) *BookServer {
-	return &BookServer{}
+func NewBookService() *BookService {
+	return &BookService{}
 }
 
-func (server *BookServer) CreateBook(ctx context.Context, req *pb.CreateBookRequest) (*pb.CreateBookResponse, error) {
-	book := req.GetBook()
-	log.Printf("received a create book request with id: %v, %v, %v, %v", book.Id, book.Name, book.Price, book.Author)
+func (b *BookService) CreateBook(ctx context.Context, req *pb.CreateBookRequest) (*pb.CreateBookResponse, error) {
+	book := req.Book
+	author := req.Book.Author
 
-	if len(book.Id) > 0 {
-		_, err := uuid.Parse(book.Id)
-		if err != nil {
-			return nil, err
-		}
-	} else {
-		id, err := uuid.NewRandom()
-		if err != nil {
-			return nil, err
-		}
-		book.Id = id.String()
-	}
+	log.Println("book details: ", book.Id, book.Name, book.Price, book.Isbn, author.FirstName, author.LastName)
 
-	err := server.Store.Save(book)
-	if err != nil {
-		return nil, err
-	}
-
-	log.Println("successfully saved book with: ", book.Id)
 	res := &pb.CreateBookResponse{
-		Id: book.Id,
+		Id: fmt.Sprintf("%s-%s", book.Id, book.Name),
 	}
+
 	return res, nil
 }
