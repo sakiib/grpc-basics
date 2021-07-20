@@ -4,6 +4,12 @@ github.com/golang/protobuf/ptypes
 github.com/golang/protobuf/ptypes/any
 github.com/golang/protobuf/ptypes/duration
 github.com/golang/protobuf/ptypes/timestamp
+# github.com/google/uuid v1.3.0
+## explicit
+github.com/google/uuid
+# github.com/jinzhu/copier v0.3.2
+## explicit
+github.com/jinzhu/copier
 # golang.org/x/net v0.0.0-20200822124328-c89045814202
 golang.org/x/net/http/httpguts
 golang.org/x/net/http2

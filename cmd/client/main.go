@@ -36,7 +36,7 @@ func main() {
 	log.Println("create book response: ", res)
 
 	resBook, err := bookServer.GetBook(ctx, &pb.GetBookRequest{
-		Id: "",
+		Id: "id-12345",
 	})
 	if err != nil {
 		log.Println(err)

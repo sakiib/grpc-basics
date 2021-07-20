@@ -17,7 +17,7 @@ func main() {
 	log.Printf("start server on port: %d", *port)
 
 	grpcServer := grpc.NewServer()
-	bookServer := service.NewBookService()
+	bookServer := service.NewBookService(service.NewInMemoryBookStore())
 	pb.RegisterBookServiceServer(grpcServer, bookServer)
 
 	address := fmt.Sprintf("0.0.0.0:%d", *port)
